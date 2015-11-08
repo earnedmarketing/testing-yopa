@@ -1,17 +1,14 @@
-describe('angularjs homepage todo list', function() {
-  it('should add a todo', function() {
-    browser.get('https://angularjs.org');
+describe('YOPA Homepage Test', function() {
+	it('should have correct meta data', function() {
+		var url = "https://www.yopa.co.uk"
+		var title = "Online Estate Agents – Sell Your House Online | YOPA"
+		var description = "Our team of property managers and agents brings 30 years of experience to every sale, helping you sell your property quickly, easily and affordably."
 
-    element(by.model('todoList.todoText')).sendKeys('write first protractor test');
-    element(by.css('[value="add"]')).click();
+		browser.get(url);
+		
+		var descriptionElement = element(by.css('meta[name=description]')).getAttribute("content");
+		expect(browser.getTitle()).toEqual(title);
+		expect(descriptionElement).toEqual(description);
 
-    var todoList = element.all(by.repeater('todo in todoList.todos'));
-    expect(todoList.count()).toEqual(3);
-    expect(todoList.get(2).getText()).toEqual('write first protractor test');
-
-    // You wrote your first test, cross it off the list
-    todoList.get(2).element(by.css('input')).click();
-    var completedAmount = element.all(by.css('.done-true'));
-    expect(completedAmount.count()).toEqual(2);
-  });
+	});
 });
